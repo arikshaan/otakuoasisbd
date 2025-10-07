@@ -175,7 +175,7 @@
         <img src="assets/logo.png" alt="Otaku Oasis logo" id="site-logo" onerror="this.style.display='none'">
         <div>
           <h1>Otaku Oasis</h1>
-          <div style="font-size:12px;color:var(--muted)">Anime Collectibles & Figures</div>
+          <div style="font-size:12px;color:var(--muted)">Anime figures & Collectibles </div>
         </div>
       </div>
       <nav>
@@ -192,13 +192,46 @@
     <section class="hero reveal" id="home">
       <div class="hero-card">
         <h2>Find rare anime figures & limited collectibles</h2>
-        <p>Premium hand-picked figures, pre-orders, and exclusive drops. Browse, reserve, and contact us directly — designed for collectors who want the best.</p>
+        <p>Premium hand-picked figures, pre-orders and exclusive drops. Browse, reserve, and contact us directly — designed for collectors who want the best.</p>
         <a href="#shop" class="cta">Shop Now</a>
 
-        <div style="margin-top:18px;color:var(--muted);font-size:13px">featured</div>
-        <div style="display:flex;gap:10px;margin-top:10px">
-          <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Free shipping on orders 5000tk+</div>
-          <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Secure local pickup</div>
+        <!-- Collector's Highlights Neon Section -->
+<div style="margin-top:18px;font-size:13px; display:flex; flex-wrap:wrap; gap:10px;">
+  <div class="neon-tag">🔥 Limited Edition Figures</div>
+  <div class="neon-tag">🎁 Free Shipping 5000tk+</div>
+  <div class="neon-tag">🛡️ 100% Authentic Collectibles</div>
+  <div class="neon-tag">🏆 Pre-order Exclusive Drops</div>
+</div>
+
+<style>
+.neon-tag {
+  padding:8px 12px;
+  border-radius:12px;
+  font-weight:700;
+  color:#ff2d6f; /* pink/red neon */
+  text-shadow:
+    0 0 5px #ff2d6f,
+    0 0 10px #ff2d6f,
+    0 0 20px #7b5cff,
+    0 0 30px #7b5cff,
+    0 0 40px #1fe0d6;
+  background: rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor:default;
+}
+.neon-tag:hover {
+  transform:scale(1.05);
+  text-shadow:
+    0 0 10px #ff2d6f,
+    0 0 20px #ff2d6f,
+    0 0 30px #7b5cff,
+    0 0 40px #7b5cff,
+    0 0 50px #1fe0d6;
+}
+</style>
+
         </div>
       </div>
 
@@ -210,6 +243,8 @@
           <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Naruto</span>
           <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Demon Slayer</span>
           <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Jujutsu Kaisen</span>
+          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">One Piece</span>
+          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Chainsawman</span>
         </div>
       </aside>
     </section>
@@ -325,7 +360,7 @@
       {id:'akaza1',name:'Akaza',price:'700tk',imgs:['assets/akaza1.JPEG','assets/akaza2.JPEG','assets/akaza3.JPEG'],desc:'Akaza figure Size:28cm from Demon Slayer.'},
       {id:'marin',name:'Marin Kitagawa',price:'800tk',imgs:['assets/marin1.JPEG','assets/marin2.JPEG','assets/marin3.JPEG'],desc:'Limited edition Marin figure from My Dressup Darling with box.'},
       {id:'tanjiro',name:'Tanjiro',price:'800tk',imgs:['assets/tanjiro1.JPG','assets/tanjiro2.JPG','assets/tanjiro3.JPG'],desc:'Tanjiro Kamado Size:28cm from Demon Slayer.'},
-      {id:'makima',name:'Bunny Makima',price:'2000tk',imgs:['assets/makima1.JPEG','assets/makima2.JPEG','assets/makima3.JPEG'],desc:'Original Furyu Makima figure Size:28cm from Chainsawman with box.'},
+      {id:'makima',name:'Bunny Makima',price:'2000tk',imgs:['assets/makima1.jpeg','assets/makima2.jpeg','assets/makima3.jpeg'],desc:'Original Furyu Makima figure Size:28cm from Chainsawman with box.'},
       {id:'rem',name:'Rem',price:'600tk',imgs:['assets/rem1.jpg','assets/rem2.JPEG','assets/rem3.jpg'],desc:'Rem figure Size:28cm from Re:Zero.'},
       {id:'tohka',name:'Tohka Yatogami',price:'800tk',imgs:['assets/tohka1.jpg','assets/tohka2.jpg','assets/tohka3.jpg'],desc:'Tohka Yatogami figure Size:28cm from Date a Live Girl.'},
       {id:'Chibi Nezuko & Zenitsu',name:'Chibi Nezuko & Zenitsu',price:'500tk',imgs:['assets/zenitsu.small.jpg','assets/nezuko.small.jpg'],desc:'Chibi cute Zenitsu & Nezuko figure Size:8cm from Demon Slayer.'}
