@@ -1,117 +1,174 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/PNG" href="assets/wb otaku.PNG">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Otaku Oasis - Your Fandom Gateway</title>
   <meta name="description" content="Otaku Oasis — anime collectibles, figures, pre-orders." />
-
+  <!-- Fonts (system-first fallback) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#07060b;
       --card:#0f1116;
       --muted:#9aa0a6;
-      --accent1:#ff2d6f; 
-      --accent2:#7b5cff; 
-      --accent3:#1fe0d6; 
+      --accent1:#ff2d6f;  /* pink/red */
+      --accent2:#7b5cff;  /* purple */
+      --accent3:#1fe0d6;  /* teal */
       --glass: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.06);
+      --radius:14px;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;background:linear-gradient(180deg,var(--bg),#060409);color:#e9eef8;line-height:1.4}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(123,92,255,0.06), transparent),
+                  linear-gradient(180deg,var(--bg),#060409);
+      color:#e9eef8;
+      line-height:1.4;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior:smooth;
+    }
 
-    header{position:sticky;top:0;backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.03);z-index:60}
-    .nav-wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px}
+    /* HEADER */
+    header{
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .nav-wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
     .brand{display:flex;align-items:center;gap:12px}
     .brand img{height:56px;display:block;cursor:pointer}
     .brand h1{font-size:20px;margin:0;color:var(--accent1);text-shadow:0 0 10px rgba(255,45,111,0.12)}
-
     nav{display:flex;gap:18px;align-items:center}
     nav a{color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:var(--accent2)}
 
-    /* ======= CLOCK STYLES ======= */
-    #clock {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+    /* CLOCK - bottom-right */
+    #clock{
+      position:fixed;
+      bottom:20px;
+      right:20px;
       background: rgba(10, 0, 20, 0.5);
       color: var(--accent2);
       font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      padding: 12px 20px;
-      border-radius: 12px;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: 0 0 5px var(--accent2), 0 0 10px var(--accent3), 0 0 15px var(--accent1);
-      text-shadow: 0 0 5px var(--accent2), 0 0 10px var(--accent3), 0 0 15px var(--accent1);
+      font-size:0.95rem;
+      padding:10px 14px;
+      border-radius:12px;
+      text-align:center;
+      z-index:1000;
+      box-shadow: 0 4px 18px rgba(123,92,255,0.06), 0 0 6px rgba(31,224,214,0.03);
+      text-shadow: 0 0 6px rgba(123,92,255,0.06);
+      backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,0.03);
     }
 
-    /* Hero */
-    .hero{max-width:1100px;margin:28px auto;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;padding:0 14px}
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
-    .hero h2{margin:0;font-size:34px;color:var(--accent1);text-shadow:0 4px 20px rgba(123,92,255,0.08)}
+    /* HERO + LAYOUT */
+    .hero{max-width:1100px;margin:28px auto;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:start;padding:0 16px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:var(--radius);border:1px solid rgba(255,255,255,0.03);position:relative;overflow:hidden}
+    .hero-card::after{
+      content:"";
+      position:absolute; right:-30px; top:-40px;
+      width:240px; height:240px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(123,92,255,0.12), transparent 40%);
+      filter:blur(18px); pointer-events:none;
+    }
+    .hero h2{margin:0;font-size:34px;color:var(--accent1);text-shadow:0 6px 26px rgba(123,92,255,0.06)}
     .hero p{color:var(--muted);margin-top:10px}
-    .cta{display:inline-block;margin-top:18px;padding:10px 16px;border-radius:10px;background:linear-gradient(90deg,var(--accent2),var(--accent3));color:#05060a;font-weight:700;text-decoration:none}
+    .cta{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:10px;background:linear-gradient(90deg,var(--accent2),var(--accent3));color:#05060a;font-weight:800;text-decoration:none;transform:translateZ(0);transition:transform .18s ease, box-shadow .18s}
+    .cta:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 10px 30px rgba(34,20,60,0.35)}
 
-    /* sidebar */
-    .side-panel{padding:18px;background:var(--card);border-radius:12px}
+    /* SIDE PANEL (now simplified) */
+    .side-panel{padding:18px;background:var(--card);border-radius:12px;position:relative}
     .side-panel h3{margin:0 0 10px 0}
+    .side-panel p{color:var(--muted)}
 
-    /* Shop grid */
-    .section{max-width:1100px;margin:24px auto;padding:0 14px}
+    /* GRID / CARDS */
+    .section{max-width:1100px;margin:24px auto;padding:0 16px}
     .section h3{color:var(--accent2);margin:6px 0 14px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .card{background:linear-gradient(180deg,var(--card),#0b0b10);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .18s, box-shadow .18s;cursor:pointer}
-    .card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-    .thumb{height:220px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:10px}
-    .thumb img{max-width:100%;max-height:100%;display:block}
+    .card{
+      background:linear-gradient(180deg,var(--card),#0b0b10);
+      padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+      cursor:pointer; overflow:hidden; position:relative;
+    }
+    .card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 18px 40px rgba(0,0,0,0.6)}
+    .thumb{height:220px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:10px;transition:transform .6s ease}
+    .thumb img{max-width:100%;max-height:100%;display:block;transition:transform .6s ease}
+    .card:hover .thumb img{transform:scale(1.14) rotate(-1deg)}
     .card h4{margin:6px 0;font-size:16px}
     .price{font-weight:800;color:var(--accent1)}
     .desc{color:var(--muted);font-size:13px;margin:8px 0}
     .btn-row{display:flex;gap:8px}
-    .btn{flex:1;padding:8px;border-radius:8px;text-align:center;text-decoration:none;font-weight:700}
+    .btn{flex:1;padding:8px;border-radius:8px;text-align:center;text-decoration:none;font-weight:700;border:none;cursor:pointer}
     .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#06060a}
-    .btn.ghost{border:1px solid rgba(255,255,255,0.04);color:var(--muted);background:transparent}
+    .btn.ghost{border:1px solid rgba(255,255,255,0.06);color:var(--muted);background:transparent}
 
-    /* Preorder */
-    .pre{display:flex;gap:12px;flex-wrap:wrap}
-    .pre .pre-card{flex:1;min-width:240px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    /* Floating quick info popup (bottom-left) */
+    .quick-btn{
+      position:fixed;
+      left:20px;
+      bottom:20px;
+      z-index:1100;
+      background:linear-gradient(180deg,var(--accent2),var(--accent3));
+      color:#05060a;
+      padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.04);
+      font-weight:800; cursor:pointer; display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(0,0,0,0.45);
+      transform-origin:center; transition:transform .18s ease;
+    }
+    .quick-btn:active{transform:scale(.98)}
+    .quick-btn .dot{width:10px;height:10px;border-radius:50%;background:var(--accent1);box-shadow:0 6px 18px rgba(255,45,111,0.08);}
 
-    /* About & Contact */
-    .two-col{display:grid;grid-template-columns:1fr 320px;gap:16px}
-    .contact-card{padding:14px;border-radius:12px;background:var(--card)}
-    label{display:block;font-size:13px;color:var(--muted);margin-top:8px}
-    input, textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
+    .quick-panel{
+      position:fixed;
+      left:20px;
+      bottom:84px;
+      z-index:1100;
+      width:320px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px; padding:12px; border:1px solid rgba(255,255,255,0.04);
+      box-shadow:0 18px 40px rgba(0,0,0,0.6);
+      transform:translateY(12px) scale(.98);
+      opacity:0; pointer-events:none; transition:opacity .18s ease, transform .18s ease;
+      backdrop-filter: blur(8px);
+    }
+    .quick-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;}
+    .quick-panel h4{margin:0 0 6px 0;color:var(--accent2)}
+    .quick-panel p{margin:6px 0;color:var(--muted);font-size:13px}
+    .quick-panel .contact-row{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .close-quick{position:absolute;right:8px;top:8px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:16px}
 
-    footer{max-width:1100px;margin:28px auto;color:var(--muted);padding:0 14px}
+    /* Modal */
+    #modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:10000;padding:24px}
+    #modal.open{display:flex}
+    .modal-card{max-width:980px;width:100%;background:linear-gradient(180deg, #0d0d12, #0b0b0f);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);display:grid;grid-template-columns:1fr 360px;gap:16px;align-items:start}
+    .modal-img{width:100%;height:420px;border-radius:10px;object-fit:contain;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+    .modal-caption{color:var(--muted);font-size:14px;white-space:pre-line}
+    .modal-actions{display:flex;gap:8px;margin-top:12px}
+    .modal-actions .btn{padding:10px 12px}
+    .modal-close{position:absolute;right:28px;top:20px;font-size:28px;color:#fff;background:transparent;border:none;cursor:pointer}
 
-    /* Responsive */
-    @media(max-width:900px){
+    /* Reveal animations */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.in-view{opacity:1;transform:translateY(0)}
+
+    footer{max-width:1100px;margin:28px auto;color:var(--muted);padding:0 16px}
+    @media(max-width:980px){
       .hero{grid-template-columns:1fr}
-      .two-col{grid-template-columns:1fr}
+      .modal-card{grid-template-columns:1fr}
+      .hero-card{padding:20px}
       .brand img{height:48px}
+      .quick-panel{width:92vw; left:4vw; bottom:86px}
     }
-
-    /* ===== MODAL STYLES ===== */
-    #modal {
-      display: none;
-      position: fixed;
-      top:0; left:0; width:100%; height:100%;
-      background: rgba(0,0,0,0.85);
-      justify-content:center; align-items:center;
-      z-index:10000; flex-direction:column;
-    }
-    #modal-img { max-width:80%; max-height:70%; border-radius:10px; margin-bottom:12px; }
-    #modal-caption { color:#fff; margin-top:10px; font-size:14px; text-align:center; white-space: pre-line;}
-    #modal span.close { position:absolute; top:20px; right:30px; font-size:28px; color:#fff; cursor:pointer; }
-    #modal button { padding:6px 12px; border-radius:6px; border:none; color:#fff; cursor:pointer; }
-    #modal button.prev { background: var(--accent2); }
-    #modal button.next { background: var(--accent3); }
   </style>
 </head>
 <body>
-
   <header>
     <div class="nav-wrap">
       <div class="brand">
@@ -132,22 +189,23 @@
   </header>
 
   <main>
-    <section class="hero" id="home">
+    <section class="hero reveal" id="home">
       <div class="hero-card">
         <h2>Find rare anime figures & limited collectibles</h2>
         <p>Premium hand-picked figures, pre-orders, and exclusive drops. Browse, reserve, and contact us directly — designed for collectors who want the best.</p>
         <a href="#shop" class="cta">Shop Now</a>
+
         <div style="margin-top:18px;color:var(--muted);font-size:13px">featured</div>
         <div style="display:flex;gap:10px;margin-top:10px">
           <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Free shipping on orders 5000tk+</div>
           <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Secure local pickup</div>
         </div>
       </div>
-      <aside class="side-panel">
-        <h3>Quick Info</h3>
-        <p style="color:var(--muted)">Open: Thu–Sat •<br>Contact: <a href="mailto:otakuoasisbd@gmail.com">Mail us</a> • +8801558056703</p>
+
+      <aside class="side-panel reveal" aria-hidden="true">
+        <h3>Side Panel</h3>
+        <p style="color:var(--muted)">Quick categories, promos and extras. Use the floating Quick Info (bottom-left) for contact & hours.</p>
         <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0">
-        <h4 style="margin:0 0 8px 0">Categories</h4>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Naruto</span>
           <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Demon Slayer</span>
@@ -156,42 +214,34 @@
       </aside>
     </section>
 
-    <section class="section" id="shop">
+    <section class="section reveal" id="shop">
       <h3>Shop</h3>
       <div class="grid" id="products-grid"></div>
     </section>
 
-    <section class="section" id="preorders">
+    <section class="section reveal" id="preorders">
       <h3>Pre-orders</h3>
       <div class="pre" id="pre-list"></div>
     </section>
 
-    <section class="section" id="about">
+    <section class="section reveal" id="about">
       <h3>About Otaku Oasis</h3>
-      <div class="two-col">
+      <div class="two-col" style="display:grid;grid-template-columns:1fr 320px;gap:16px">
         <div>
           <p style="color:var(--muted)">Otaku Oasis started with one mission: to bring the best anime figures to passionate collectors at an affordable price. We source from trusted suppliers and inspect every item before listing it. Follow our socials for drop alerts and exclusive sales.</p>
-          <div style="margin-top:12px">
-            <strong style="color:var(--accent3)">Why buy from us?</strong>
-            <ul style="color:var(--muted)">
-              <li>Authentic products</li>
-              <li>Local shipping & pickup</li>
-              <li>Pre-order support</li>
-            </ul>
-          </div>
         </div>
-        <aside class="contact-card">
-          <h4 style="margin-top:0">Contact & Hours</h4>
-          <p style="color:var(--muted)">Email: <a href="mailto:techoasis0cloud@gmail.com">Click!</a></p>
+        <aside class="contact-card" style="padding:14px;border-radius:12px;background:var(--card)">
+          <h4 style="margin-top:0;color:var(--accent2)">Contact & Hours</h4>
+          <p style="color:var(--muted)">Email: <a href="mailto:techoasis0cloud@gmail.com" style="color:var(--muted);text-decoration:underline">Click!</a></p>
           <p style="color:var(--muted)">Phone: +8801558056703</p>
-          <p style="color:var(--muted)">Shop: We are online based (pickup available at New Elephant Road)</p>
+          <p style="color:var(--muted)">Pickup available at New Elephant Road</p>
         </aside>
       </div>
     </section>
 
-    <section class="section" id="contact">
+    <section class="section reveal" id="contact">
       <h3>Contact</h3>
-      <div class="two-col">
+      <div class="two-col" style="display:grid;grid-template-columns:1fr 320px;gap:16px">
         <div>
           <p style="color:var(--muted)">Send us a message — we usually reply within 24 hours.</p>
           <form onsubmit="event.preventDefault(); contactSubmit()" style="max-width:640px">
@@ -208,12 +258,11 @@
             <p id="contact-note" style="color:var(--muted);font-size:13px;margin-top:8px"></p>
           </form>
         </div>
-        <aside class="contact-card">
+        <aside class="contact-card" style="padding:14px;border-radius:12px;background:var(--card)">
           <h4 style="margin-top:0">Follow & help</h4>
           <p style="color:var(--muted)">
             <a href="https://www.instagram.com/theotakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Instagram</a> / 
-            <a href="https://www.facebook.com/otakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Facebook</a> 
-            You can also reserve items by sending us a message with the product name.
+            <a href="https://www.facebook.com/otakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Facebook</a>
           </p>
         </aside>
       </div>
@@ -221,32 +270,60 @@
   </main>
 
   <footer>
-    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:8px 14px">
+    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:8px 16px">
       <div>© <span id="year"></span> Otaku Oasis</div>
       <div style="color:var(--muted);font-size:13px">a sister concern of Tech Oasis</div>
     </div>
   </footer>
 
   <!-- Clock -->
-  <div id="clock"></div>
+  <div id="clock" aria-hidden="true"></div>
 
-  <!-- Modal for slideshow -->
-  <div id="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <img id="modal-img">
-    <div style="display:flex;gap:12px">
-      <button class="prev" onclick="prevImage()">Prev</button>
-      <button class="next" onclick="nextImage()">Next</button>
+  <!-- Floating Quick Info -->
+  <button class="quick-btn" id="quickBtn" aria-expanded="false" aria-controls="quickPanel" title="Quick Info">
+    <span class="dot" aria-hidden="true"></span>
+    <span style="font-weight:700">Quick Info</span>
+  </button>
+  <div class="quick-panel" id="quickPanel" role="dialog" aria-hidden="true" aria-label="Quick Info panel">
+    <button class="close-quick" id="closeQuick" title="Close">&times;</button>
+    <h4>Otaku Oasis — Quick Info</h4>
+    <p style="margin:0;color:var(--muted)">Open: Thu–Sat • Pickup: New Elephant Road</p>
+    <div class="contact-row">
+      <div style="font-size:13px;color:var(--muted)">Phone: +8801558056703</div>
+      <a class="btn primary" href="https://wa.me/8801558056703" target="_blank" style="padding:8px 10px;font-weight:700">Chat</a>
     </div>
-    <div id="modal-caption"></div>
+    <p style="margin-top:10px;color:var(--muted);font-size:13px">Email: <a href="mailto:otakuoasisbd@gmail.com" style="color:var(--muted);text-decoration:underline">otakuoasisbd@gmail.com</a></p>
+    <div style="margin-top:8px;display:flex;gap:8px">
+      <a class="btn ghost" href="#contact">Contact Form</a>
+      <a class="btn ghost" href="#shop">Shop</a>
+    </div>
+  </div>
+
+  <!-- Modal for quick-view -->
+  <div id="modal" aria-hidden="true">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close modal">&times;</button>
+    <div class="modal-card" role="dialog" aria-label="Product details">
+      <div>
+        <img id="modal-img" class="modal-img" src="" alt="">
+      </div>
+      <div>
+        <h3 id="modal-title" style="margin:0;color:var(--accent1)"></h3>
+        <div class="modal-caption" id="modal-caption"></div>
+        <div class="modal-actions">
+          <a id="reserveLink" class="btn primary" href="#">Reserve / Buy</a>
+          <a id="chatLink" class="btn ghost" href="#" target="_blank">Chat</a>
+        </div>
+        <div style="margin-top:12px;color:var(--muted)" id="modal-extra"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // ===== Products & Preorders =====
+    // ===== Data =====
     const products = [
       {id:'akaza1',name:'Akaza',price:'700tk',imgs:['assets/akaza1.JPEG','assets/akaza2.JPEG','assets/akaza3.JPEG'],desc:'High-quality Akaza figure from Demon Slayer.'},
-      {id:'marinkitagawa',name:'Marin Kiatgawa (13cm) Premium',price:'800tk',imgs:['assets/marin1.JPEG','assets/marin2.JPEG', 'assets/marin3.JPEG'],desc:'Limited edition Marin figure with box.'},
-      {id:'gojo-001',name:'Gojo Satoru',price:'900tk',imgs:['assets/akaza001.jpg','assets/akaza002.jpg','assets/akaza003.jpg'],desc:'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'}
+      {id:'marin',name:'Marin Kitagawa (13cm) Premium',price:'800tk',imgs:['assets/marin1.JPEG','assets/marin2.JPEG','assets/marin3.JPEG'],desc:'Limited edition Marin figure with box.'},
+      {id:'gojo-001',name:'Gojo Satoru',price:'900tk',imgs:['assets/gojo1.jpg','assets/gojo2.jpg','assets/gojo3.jpg'],desc:'Detailed 28cm Gojo figure. Perfect for Jujutsu Kaisen fans.'}
     ];
     const preorders = [
       {title:'Sailor Moon - Limited', eta:'2026-01', note:'Reserve now, limited run.'},
@@ -254,72 +331,151 @@
     ];
 
     // ===== Clock =====
-    function updateClock() {
-      const now = new Date();
-      const options = {timeZone:'Asia/Dhaka', weekday:'long', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'};
-      document.getElementById("clock").textContent = now.toLocaleString('en-US', options);
+    function updateClock(){
+      const now=new Date();
+      const options={timeZone:'Asia/Dhaka', weekday:'short', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'};
+      document.getElementById('clock').textContent = now.toLocaleString('en-US', options);
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ===== Render Products & Preorders =====
+    // ===== Render products =====
     const grid = document.getElementById('products-grid');
     products.forEach(p=>{
-      const el=document.createElement('div'); el.className='card';
+      const el=document.createElement('div'); el.className='card reveal';
       el.innerHTML = `
         <div class="thumb"><img src="${p.imgs[0]}" alt="${p.name}"></div>
         <h4>${p.name}</h4>
         <div class="price">${p.price}</div>
         <div class="desc">${p.desc}</div>
         <div class="btn-row">
-          <a class="btn primary" href="mailto:otakuoasisbd@gmail.com?subject=Order%20${encodeURIComponent(p.name)}">Reserve / Buy</a>
-          <a class="btn ghost" href="#" onclick="showDetails('${p.id}');return false">Details</a>
+          <button class="btn primary" data-id="${p.id}">Reserve / Buy</button>
+          <button class="btn ghost" data-id="${p.id}">Details</button>
         </div>
       `;
       grid.appendChild(el);
-      // Make thumbnail clickable
-      el.querySelector('.thumb img').addEventListener('click',()=>{showDetails(p.id)});
+
+      // button handlers
+      el.querySelectorAll('[data-id]').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const id=e.currentTarget.getAttribute('data-id');
+          const label = e.currentTarget.classList.contains('primary') ? 'reserve' : 'details';
+          if(label==='reserve'){
+            // open mailto or chat options (prefer mail)
+            window.location.href = `mailto:otakuoasisbd@gmail.com?subject=${encodeURIComponent('Reserve: '+p.name)}`;
+          } else {
+            showDetails(id);
+          }
+        });
+      });
+
+      // clickable thumb opens details
+      el.querySelector('.thumb img').addEventListener('click', ()=> showDetails(p.id));
     });
 
+    // ===== Render preorders =====
     const list = document.getElementById('pre-list');
     preorders.forEach(p=>{
-      const div=document.createElement('div'); div.className='pre-card';
-      div.innerHTML=`<strong>${p.title}</strong><div style='color:var(--muted);font-size:13px'>ETA: ${p.eta}</div><div style='margin-top:8px;color:var(--muted)'>${p.note}</div><div style='margin-top:8px'><a class='btn primary' href='mailto:otaku@example.com?subject=Preorder%20${encodeURIComponent(p.title)}'>Pre-order</a></div>`;
+      const div=document.createElement('div'); div.className='pre-card reveal';
+      div.style.padding='12px'; div.style.background='linear-gradient(180deg, rgba(255,255,255,0.015), transparent)';
+      div.style.borderRadius='10px'; div.style.border='1px solid rgba(255,255,255,0.03)'; div.style.flex='1'; div.style.minWidth='240px';
+      div.innerHTML=`<strong style="color:var(--accent1)">${p.title}</strong><div style='color:var(--muted);font-size:13px'>ETA: ${p.eta}</div><div style='margin-top:8px;color:var(--muted)'>${p.note}</div><div style='margin-top:8px'><a class='btn primary' href='mailto:otakuoasisbd@gmail.com?subject=Preorder%20${encodeURIComponent(p.title)}'>Pre-order</a></div>`;
       list.appendChild(div);
     });
 
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // ===== Contact Form =====
+    // ===== Contact form =====
     function contactSubmit(){
       const name=document.getElementById('cname').value;
       const email=document.getElementById('cemail').value;
       const msg=document.getElementById('cmsg').value;
       const subject=encodeURIComponent('Message from '+name);
       const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+msg);
-      window.location.href=`mailto:otaku@example.com?subject=${subject}&body=${body}`;
+      window.location.href=`mailto:otakuoasisbd@gmail.com?subject=${subject}&body=${body}`;
       document.getElementById('contact-note').textContent='Opening your email app to send the message...';
     }
 
-    // ===== Modal Slideshow =====
-    let currentImages = [], currentIndex=0, currentCaption='';
+    // ===== Modal slideshow & quick view =====
+    let currentImages=[], currentIndex=0, currentProduct=null;
     function showDetails(id){
       const p = products.find(x=>x.id===id);
-      if(!p) return alert('Product not found');
+      if(!p) return;
+      currentProduct=p;
       currentImages=p.imgs;
       currentIndex=0;
-      currentCaption=p.name+'\n'+p.desc+'\nPrice: '+p.price;
+      document.getElementById('modal-img').src = currentImages[0] || '';
+      document.getElementById('modal-img').alt = p.name;
+      document.getElementById('modal-title').textContent = p.name + ' — ' + p.price;
+      document.getElementById('modal-caption').textContent = p.desc;
+      document.getElementById('reserveLink').href = `mailto:otakuoasisbd@gmail.com?subject=${encodeURIComponent('Reserve: '+p.name)}`;
+      document.getElementById('chatLink').href = `https://wa.me/8801558056703?text=${encodeURIComponent('Hi, I am interested in '+p.name)}`;
+      document.getElementById('modal-extra').textContent = 'Click image to cycle; use left/right arrow to navigate.';
       openModal();
     }
     function openModal(){
-      const modal=document.getElementById('modal');
-      document.getElementById('modal-img').src=currentImages[currentIndex];
-      document.getElementById('modal-caption').textContent=currentCaption;
-      modal.style.display='flex';
+      const m=document.getElementById('modal');
+      m.classList.add('open'); m.setAttribute('aria-hidden','false');
+      // keyboard handlers
+      window.addEventListener('keydown', modalKeyHandler);
+      document.getElementById('modal-img').addEventListener('click', modalNext);
     }
-    function closeModal(){document.getElementById('modal').style.display='none'}
-    function nextImage(){currentIndex=(currentIndex+1)%currentImages.length; document.getElementById('modal-img').src=currentImages[currentIndex];}
-    function prevImage(){currentIndex=(currentIndex-1+currentImages.length)%currentImages.length; document.getElementById('modal-img').src=currentImages[currentIndex];}
+    function closeModal(){
+      const m=document.getElementById('modal');
+      m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+      window.removeEventListener('keydown', modalKeyHandler);
+      try { document.getElementById('modal-img').removeEventListener('click', modalNext); } catch(e){}
+    }
+    function modalNext(){ if(!currentImages.length) return; currentIndex=(currentIndex+1)%currentImages.length; document.getElementById('modal-img').src=currentImages[currentIndex]; }
+    function modalPrev(){ if(!currentImages.length) return; currentIndex=(currentIndex-1+currentImages.length)%currentImages.length; document.getElementById('modal-img').src=currentImages[currentIndex]; }
+    function modalKeyHandler(e){
+      if(e.key === 'Escape') closeModal();
+      if(e.key === 'ArrowRight') modalNext();
+      if(e.key === 'ArrowLeft') modalPrev();
+    }
+
+    // ===== Quick Info toggle =====
+    const quickBtn = document.getElementById('quickBtn');
+    const quickPanel = document.getElementById('quickPanel');
+    const closeQuick = document.getElementById('closeQuick');
+    quickBtn.addEventListener('click', ()=>{
+      const open = quickPanel.classList.toggle('open');
+      quickBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      quickPanel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    });
+    closeQuick.addEventListener('click', ()=> { quickPanel.classList.remove('open'); quickBtn.setAttribute('aria-expanded','false'); quickPanel.setAttribute('aria-hidden','true'); });
+
+    // close quick panel when clicking outside
+    document.addEventListener('click', (e)=>{
+      if(!quickPanel.contains(e.target) && !quickBtn.contains(e.target)) {
+        quickPanel.classList.remove('open');
+        quickBtn.setAttribute('aria-expanded','false');
+        quickPanel.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // ===== Reveal on scroll =====
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          // optionally unobserve after reveal for performance
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    reveals.forEach(r=>io.observe(r));
+
+    // Accessibility: trap focus inside modal when open (basic)
+    document.getElementById('modal').addEventListener('focusout', (e)=>{
+      // keep simple: close modal when focus leaves and modal is open and clicked outside
+    });
+
+    // small helper to ensure images exist gracefully
+    document.querySelectorAll('img').forEach(img=>{
+      img.addEventListener('error', ()=>{ img.style.opacity = '0.0'; img.style.transform='scale(.98)'; });
+    });
   </script>
 </body>
 </html>
