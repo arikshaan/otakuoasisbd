@@ -222,29 +222,41 @@
 
   <script>
     // ========== PRODUCTS: edit this array to add/remove items ===========
-    const products = [
-      {
-        id: 'akaza1',
-        name: 'Akaza ',
-        price: '700tk',
-        img: 'https://via.placeholder.com/400x400?text=Naruto',
-        desc: 'High-quality Naruto figure. 10cm tall, PVC, great for display.'
-      },
-      {
-        id: 'akaza-001',
-        name: 'Akaza (28cm) Premium',
-        price: '800tk',
-        img: 'https://via.placeholder.com/400x400?text=Akaza',
-        desc: 'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'
-      },
-      {
-        id: 'gojo-001',
-        name: 'Gojo Satoru',
-        price: '800tk',
-        img: 'https://via.placeholder.com/400x400?text=Gojo',
-        desc: 'Limited edition Gojo figure with collectible base.'
-      }
-    ];
+const products = [
+  {
+    id: 'akaza1',
+    name: 'Akaza',
+    price: '700tk',
+    imgs: [
+      'assets/akaza1.JPEG',
+      'assets/akaza2.JPEG',
+      'assets/akaza3.JPEG'
+    ],
+    desc: 'High-quality Akaza figure from Demon Slayer. cm tall, PVC, great for display.'
+  },
+  {
+    id: 'akaza-001',
+    name: 'Akaza (28cm) Premium',
+    price: '800tk',
+    imgs: [
+      'assets/akaza001.jpg',
+      'assets/akaza002.jpg',
+      'assets/akaza003.jpg'
+    ],
+    desc: 'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'
+  },
+  {
+    id: 'gojo-001',
+    name: 'Gojo Satoru',
+    price: '800tk',
+    imgs: [
+      'assets/gojo01.jpg',
+      'assets/gojo02.jpg'
+    ],
+    desc: 'Limited edition Gojo figure with collectible base.'
+  }
+];
+
 
     const preorders = [
       {title:'Sailor Moon - Limited', eta:'2026-01', note:'Reserve now, limited run.'},
