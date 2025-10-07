@@ -1,8 +1,9 @@
+<!doctype html>
+<html lang="en">
 <head>
-  <link rel="icon" type="image/PNG" href="assets/wb otaku.PNG">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Otaku Oasis-Your Fandom Gateaway</title>
+  <title>Otaku Oasis - Your Fandom Gateway</title>
   <meta name="description" content="Otaku Oasis — anime collectibles, figures, pre-orders." />
 
   <style>
@@ -10,9 +11,9 @@
       --bg:#07060b;
       --card:#0f1116;
       --muted:#9aa0a6;
-      --accent1:#ff2d6f; /* neon pink/red */
-      --accent2:#7b5cff; /* neon purple */
-      --accent3:#1fe0d6; /* blue-green */
+      --accent1:#ff2d6f;
+      --accent2:#7b5cff;
+      --accent3:#1fe0d6;
       --glass: rgba(255,255,255,0.04);
     }
     *{box-sizing:border-box}
@@ -23,46 +24,24 @@
     .brand{display:flex;align-items:center;gap:12px}
     .brand img{height:56px;display:block}
     .brand h1{font-size:20px;margin:0;color:var(--accent1);text-shadow:0 0 10px rgba(255,45,111,0.12)}
-
     nav{display:flex;gap:18px;align-items:center}
     nav a{color:var(--muted);text-decoration:none;font-weight:600}
     nav a:hover{color:var(--accent2)}
 
-    /* ======= CLOCK STYLES ======= */
-    #clock {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: rgba(10, 0, 20, 0.5); /* dark semi-transparent */
-      color: var(--accent2); /* neon purple text */
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1rem;
-      padding: 12px 20px;
-      border-radius: 12px;
-      text-align: center;
-      z-index: 1000;
-      box-shadow: 0 0 5px var(--accent2), 0 0 10px var(--accent3), 0 0 15px var(--accent1);
-      text-shadow: 0 0 5px var(--accent2), 0 0 10px var(--accent3), 0 0 15px var(--accent1);
-    }
-   
-    /* Hero */
     .hero{max-width:1100px;margin:28px auto;display:grid;grid-template-columns:1fr 380px;gap:28px;align-items:center;padding:0 14px}
     .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:14px;border:1px solid rgba(255,255,255,0.03)}
     .hero h2{margin:0;font-size:34px;color:var(--accent1);text-shadow:0 4px 20px rgba(123,92,255,0.08)}
     .hero p{color:var(--muted);margin-top:10px}
     .cta{display:inline-block;margin-top:18px;padding:10px 16px;border-radius:10px;background:linear-gradient(90deg,var(--accent2),var(--accent3));color:#05060a;font-weight:700;text-decoration:none}
-
-    /* sidebar */
     .side-panel{padding:18px;background:var(--card);border-radius:12px}
     .side-panel h3{margin:0 0 10px 0}
 
-    /* Shop grid */
     .section{max-width:1100px;margin:24px auto;padding:0 14px}
     .section h3{color:var(--accent2);margin:6px 0 14px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
     .card{background:linear-gradient(180deg,var(--card),#0b0b10);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .18s, box-shadow .18s}
     .card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
-    .thumb{height:220px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:10px}
+    .thumb{height:220px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:10px;cursor:pointer}
     .thumb img{max-width:100%;max-height:100%;display:block}
     .card h4{margin:6px 0;font-size:16px}
     .price{font-weight:800;color:var(--accent1)}
@@ -72,23 +51,49 @@
     .btn.primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#06060a}
     .btn.ghost{border:1px solid rgba(255,255,255,0.04);color:var(--muted);background:transparent}
 
-    /* Preorder */
-    .pre{display:flex;gap:12px;flex-wrap:wrap}
-    .pre .pre-card{flex:1;min-width:240px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    /* Lightbox / Slider Popup */
+    .lightbox {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox-content {
+      position: relative;
+      width: 90%; max-width: 400px;
+      text-align: center;
+    }
+    .lightbox img {
+      width: 100%; border-radius: 12px;
+      box-shadow: 0 0 20px #000;
+    }
+    .lightbox h2 { color: var(--accent3); margin: 12px 0 4px; }
+    .lightbox p { color: var(--muted); font-size: 14px; }
+    .lightbox .nav-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: var(--accent1);
+      border: none; color: white;
+      font-size: 22px; border-radius: 50%;
+      width: 40px; height: 40px;
+      cursor: pointer;
+    }
+    .lightbox .prev { left: -50px; }
+    .lightbox .next { right: -50px; }
+    .lightbox .close {
+      position: absolute; top: -40px; right: 0;
+      font-size: 24px; color: var(--muted);
+      cursor: pointer;
+    }
 
-    /* About & Contact */
-    .two-col{display:grid;grid-template-columns:1fr 320px;gap:16px}
-    .contact-card{padding:14px;border-radius:12px;background:var(--card)}
-    label{display:block;font-size:13px;color:var(--muted);margin-top:8px}
-    input, textarea{width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit}
-
-    footer{max-width:1100px;margin:28px auto;color:var(--muted);padding:0 14px}
-
-    /* Responsive */
+    footer{max-width:1100px;margin:28px auto;color:var(--muted);padding:0 14px;text-align:center}
     @media(max-width:900px){
       .hero{grid-template-columns:1fr}
-      .two-col{grid-template-columns:1fr}
-      .brand img{height:48px}
+      .lightbox .prev{left:10px}
+      .lightbox .next{right:10px}
     }
   </style>
 </head>
@@ -96,7 +101,6 @@
   <header>
     <div class="nav-wrap">
       <div class="brand">
-        <!-- Replace the logo by uploading your logo to /assets/logo.png -->
         <img src="assets/logo.png" alt="Otaku Oasis logo" id="site-logo" onerror="this.style.display='none'">
         <div>
           <h1>Otaku Oasis</h1>
@@ -114,226 +118,92 @@
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <div class="hero-card">
-        <h2>Find rare anime figures & limited collectibles</h2>
-        <p>Premium hand-picked figures, pre-orders, and exclusive drops. Browse, reserve, and contact us directly — designed for collectors who want the best.</p>
-        <a href="#shop" class="cta">Shop Now</a>
-
-        <div style="margin-top:18px;color:var(--muted);font-size:13px">featured</div>
-        <div style="display:flex;gap:10px;margin-top:10px">
-          <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Free shipping on orders 5000tk+</div>
-          <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Secure local pickup</div>
-        </div>
-      </div>
-
-      <aside class="side-panel">
-        <h3>Quick Info</h3>
-        <p style="color:var(--muted)">Open: Thu–Sat •<br>Contact: <a href="mailto:otakuoasisbd@gmail.com">Mail us</a> • +8801558056703</p>
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0">
-        <h4 style="margin:0 0 8px 0">Categories</h4>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Naruto</span>
-          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Demon Slayer</span>
-          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Jujutsu Kaisen</span>
-        </div>
-      </aside>
-    </section>
-
     <section class="section" id="shop">
       <h3>Shop</h3>
-      <div class="grid" id="products-grid">
-        <!-- Product cards are injected by JavaScript (edit the products array at bottom) -->
-      </div>
+      <div class="grid" id="products-grid"></div>
     </section>
-
-    <section class="section" id="preorders">
-      <h3>Pre-orders</h3>
-      <div class="pre" id="pre-list">
-        <!-- Pre-orders injected by JavaScript -->
-      </div>
-    </section>
-
-    <section class="section" id="about">
-      <h3>About Otaku Oasis</h3>
-      <div class="two-col">
-        <div>
-          <p style="color:var(--muted)">Otaku Oasis started with one mission: to bring the best anime figures to passionate collectors at an affordable price. We source from trusted suppliers and inspect every item before listing it. Follow our socials for drop alerts and exclusive sales.</p>
-
-          <div style="margin-top:12px">
-            <strong style="color:var(--accent3)">Why buy from us?</strong>
-            <ul style="color:var(--muted)">
-              <li>Authentic products</li>
-              <li>Local shipping & pickup</li>
-              <li>Pre-order support</li>
-            </ul>
-          </div>
-        </div>
-
-        <aside class="contact-card">
-          <h4 style="margin-top:0">Contact & Hours</h4>
-          <p style="color:var(--muted)">Email: <a href="mailto:techoasis0cloud@gmail.com">Click!</a></p>
-          <p style="color:var(--muted)">Phone: +8801558056703</p>
-          <p style="color:var(--muted)">Shop: We are online based (pickup available at New Elephant Road)</p>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <h3>Contact</h3>
-      <div class="two-col">
-        <div>
-          <p style="color:var(--muted)">Send us a message — we usually reply within 24 hours.</p>
-          <form onsubmit="event.preventDefault(); contactSubmit()" style="max-width:640px">
-            <label>Your name</label>
-            <input id="cname" placeholder="Your name" required>
-            <label>Your email</label>
-            <input id="cemail" type="email" placeholder="you@example.com" required>
-            <label>Message</label>
-            <textarea id="cmsg" rows="5" placeholder="I want to ask about..." required></textarea>
-            <div style="margin-top:10px;display:flex;gap:8px">
-              <button class="btn primary" type="submit">Send</button>
-              <a class="btn ghost" href="mailto:otaku@example.com">Email Directly</a>
-            </div>
-            <p id="contact-note" style="color:var(--muted);font-size:13px;margin-top:8px"></p>
-          </form>
-        </div>
-
-        <aside class="contact-card">
-          <h4 style="margin-top:0">Follow & help</h4>
-          <p style="color:var(--muted)">
-  <a href="https://www.instagram.com/theotakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Instagram</a> / 
-  <a href="https://www.facebook.com/otakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Facebook</a> links here. 
-  You can also reserve items by sending us a message with the product name.
-</p>
-
-        </aside>
-      </div>
-    </section>
-
   </main>
 
-  <footer>
-    <div style="display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:8px 14px">
-      <div>© <span id="year"></span> Otaku Oasis</div>
-      <div style="color:var(--muted);font-size:13px">a sister concern of Tech Oasis</div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <span class="close" id="closeLightbox">✖</span>
+      <button class="nav-btn prev" id="prevBtn">⭠</button>
+      <button class="nav-btn next" id="nextBtn">⭢</button>
+      <img id="lightboxImg" src="">
+      <h2 id="lightboxName"></h2>
+      <p id="lightboxDesc"></p>
+      <p id="lightboxPrice" style="color:var(--accent1);font-weight:700"></p>
     </div>
-  </footer>
+  </div>
+
+  <footer>© <span id="year"></span> Otaku Oasis</footer>
 
   <script>
-    // ========== PRODUCTS: edit this array to add/remove items ===========
-const products = [
-  {
-    id: 'akaza1',
-    name: 'Akaza',
-    price: '700tk',
-    imgs: [
-      'assets/akaza1.JPEG',
-      'assets/akaza2.JPEG',
-      'assets/akaza3.JPEG'
-    ],
-    desc: 'High-quality Akaza figure from Demon Slayer. cm tall, PVC, great for display.'
-  },
-  {
-    id: 'akaza-001',
-    name: 'Akaza (28cm) Premium',
-    price: '800tk',
-    imgs: [
-      'assets/akaza001.jpg',
-      'assets/akaza002.jpg',
-      'assets/akaza003.jpg'
-    ],
-    desc: 'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'
-  },
-  {
-    id: 'gojo-001',
-    name: 'Gojo Satoru',
-    price: '800tk',
-    imgs: [
-      'assets/gojo01.jpg',
-      'assets/gojo02.jpg'
-    ],
-    desc: 'Limited edition Gojo figure with collectible base.'
-  }
-];
-
-
-    const preorders = [
-      {title:'Sailor Moon - Limited', eta:'2026-01', note:'Reserve now, limited run.'},
-      {title:'Jujutsu Kaisen Set', eta:'2025-12', note:'Bundle pre-order discount.'}
+    const products = [
+      {
+        id: 'naruto-001',
+        name: 'Naruto Uzumaki',
+        price: '300tk',
+        img: 'https://via.placeholder.com/400x400?text=Naruto',
+        desc: 'High-quality Naruto figure. 10cm tall, PVC, great for display.'
+      },
+      {
+        id: 'akaza-001',
+        name: 'Akaza (28cm) Premium',
+        price: '800tk',
+        img: 'https://via.placeholder.com/400x400?text=Akaza',
+        desc: 'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'
+      },
+      {
+        id: 'gojo-001',
+        name: 'Gojo Satoru',
+        price: '800tk',
+        img: 'https://via.placeholder.com/400x400?text=Gojo',
+        desc: 'Limited edition Gojo figure with collectible base.'
+      }
     ];
 
-    function renderProducts(){
-      const grid = document.getElementById('products-grid');
-      grid.innerHTML='';
-      products.forEach(p => {
-        const el = document.createElement('div'); el.className='card';
-        el.innerHTML = `
-          <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
-          <h4>${p.name}</h4>
-          <div class="price">${p.price}</div>
-          <div class="desc">${p.desc}</div>
-          <div class="btn-row">
-            <a class="btn primary" href="mailto:otakuoasisbd@gmail.com?subject=Order%20${encodeURIComponent(p.name)}">Reserve / Buy</a>
-            <a class="btn ghost" href="#" onclick="showDetails('${p.id}');return false">Details</a>
-          </div>
-        `;
-        grid.appendChild(el);
-      });
+    const grid = document.getElementById('products-grid');
+    products.forEach((p,i)=>{
+      const card=document.createElement('div');
+      card.className='card';
+      card.innerHTML=`
+        <div class="thumb" onclick="openLightbox(${i})"><img src="${p.img}" alt="${p.name}"></div>
+        <h4>${p.name}</h4>
+        <div class="price">${p.price}</div>
+        <div class="desc">${p.desc}</div>
+      `;
+      grid.appendChild(card);
+    });
+
+    let current = 0;
+    const lightbox = document.getElementById('lightbox');
+    const imgEl = document.getElementById('lightboxImg');
+    const nameEl = document.getElementById('lightboxName');
+    const descEl = document.getElementById('lightboxDesc');
+    const priceEl = document.getElementById('lightboxPrice');
+
+    function openLightbox(index){
+      current = index;
+      updateLightbox();
+      lightbox.classList.add('active');
+    }
+    function closeLightbox(){
+      lightbox.classList.remove('active');
+    }
+    function updateLightbox(){
+      const p = products[current];
+      imgEl.src = p.img;
+      nameEl.textContent = p.name;
+      descEl.textContent = p.desc;
+      priceEl.textContent = p.price;
     }
 
-    function renderPreorders(){
-      const list = document.getElementById('pre-list'); list.innerHTML='';
-      preorders.forEach(p=>{
-        const div=document.createElement('div');div.className='pre-card';
-        div.innerHTML = `<strong>${p.title}</strong><div style='color:var(--muted);font-size:13px'>ETA: ${p.eta}</div><div style='margin-top:8px;color:var(--muted)'>${p.note}</div><div style='margin-top:8px'><a class='btn primary' href='mailto:otaku@example.com?subject=Preorder%20${encodeURIComponent(p.title)}'>Pre-order</a></div>`;
-        list.appendChild(div);
-      })
-    }
-
-    function showDetails(id){
-      const p = products.find(x=>x.id===id);
-      if(!p) return alert('Product not found');
-      alert(p.name + '\n\n' + p.desc + '\n\nPrice: ' + p.price);
-    }
-
-    function contactSubmit(){
-      const name = document.getElementById('cname').value;
-      const email = document.getElementById('cemail').value;
-      const msg = document.getElementById('cmsg').value;
-      // Simplest: open email client with prefilled message (works for most users)
-      const subject = encodeURIComponent('Message from ' + name);
-      const body = encodeURIComponent('Name: '+name + '\nEmail: '+email + '\n\n' + msg);
-      window.location.href = `mailto:otaku@example.com?subject=${subject}&body=${body}`;
-      document.getElementById('contact-note').textContent = 'Opening your email app to send the message...';
-    }
-
-    // initial render
-    renderProducts(); renderPreorders();
+    document.getElementById('nextBtn').onclick = ()=>{ current=(current+1)%products.length; updateLightbox(); };
+    document.getElementById('prevBtn').onclick = ()=>{ current=(current-1+products.length)%products.length; updateLightbox(); };
+    document.getElementById('closeLightbox').onclick = closeLightbox;
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
-
- <div id="clock"></div>
-
-<script>
-  function updateClock() {
-    const now = new Date();
-    const options = {
-      timeZone: 'Asia/Dhaka',
-      weekday: 'long',
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    };
-    const timeString = now.toLocaleString('en-US', options);
-    document.getElementById("clock").textContent = timeString;
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
-</script>
-
 </body>
 </html>
