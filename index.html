@@ -4,7 +4,7 @@
   <link rel="icon" type="image/PNG" href="assets/wb otaku.PNG">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Otaku Oasis-Your Fandom Gateaway</title>
+  <title>Otaku Oasis - Your Fandom Gateway</title>
   <meta name="description" content="Otaku Oasis — anime collectibles, figures, pre-orders." />
 
   <style>
@@ -12,9 +12,9 @@
       --bg:#07060b;
       --card:#0f1116;
       --muted:#9aa0a6;
-      --accent1:#ff2d6f; /* neon pink/red */
-      --accent2:#7b5cff; /* neon purple */
-      --accent3:#1fe0d6; /* blue-green */
+      --accent1:#ff2d6f; 
+      --accent2:#7b5cff; 
+      --accent3:#1fe0d6; 
       --glass: rgba(255,255,255,0.04);
     }
     *{box-sizing:border-box}
@@ -23,7 +23,7 @@
     header{position:sticky;top:0;backdrop-filter: blur(6px);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-bottom:1px solid rgba(255,255,255,0.03);z-index:60}
     .nav-wrap{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:14px}
     .brand{display:flex;align-items:center;gap:12px}
-    .brand img{height:56px;display:block}
+    .brand img{height:56px;display:block;cursor:pointer}
     .brand h1{font-size:20px;margin:0;color:var(--accent1);text-shadow:0 0 10px rgba(255,45,111,0.12)}
 
     nav{display:flex;gap:18px;align-items:center}
@@ -62,7 +62,7 @@
     .section{max-width:1100px;margin:24px auto;padding:0 14px}
     .section h3{color:var(--accent2);margin:6px 0 14px}
     .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .card{background:linear-gradient(180deg,var(--card),#0b0b10);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .18s, box-shadow .18s}
+    .card{background:linear-gradient(180deg,var(--card),#0b0b10);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);transition:transform .18s, box-shadow .18s;cursor:pointer}
     .card:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,0.6)}
     .thumb{height:220px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));margin-bottom:10px}
     .thumb img{max-width:100%;max-height:100%;display:block}
@@ -92,9 +92,26 @@
       .two-col{grid-template-columns:1fr}
       .brand img{height:48px}
     }
+
+    /* ===== MODAL STYLES ===== */
+    #modal {
+      display: none;
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.85);
+      justify-content:center; align-items:center;
+      z-index:10000; flex-direction:column;
+    }
+    #modal-img { max-width:80%; max-height:70%; border-radius:10px; margin-bottom:12px; }
+    #modal-caption { color:#fff; margin-top:10px; font-size:14px; text-align:center; white-space: pre-line;}
+    #modal span.close { position:absolute; top:20px; right:30px; font-size:28px; color:#fff; cursor:pointer; }
+    #modal button { padding:6px 12px; border-radius:6px; border:none; color:#fff; cursor:pointer; }
+    #modal button.prev { background: var(--accent2); }
+    #modal button.next { background: var(--accent3); }
   </style>
 </head>
 <body>
+
   <header>
     <div class="nav-wrap">
       <div class="brand">
@@ -115,9 +132,91 @@
   </header>
 
   <main>
+    <section class="hero" id="home">
+      <div class="hero-card">
+        <h2>Find rare anime figures & limited collectibles</h2>
+        <p>Premium hand-picked figures, pre-orders, and exclusive drops. Browse, reserve, and contact us directly — designed for collectors who want the best.</p>
+        <a href="#shop" class="cta">Shop Now</a>
+        <div style="margin-top:18px;color:var(--muted);font-size:13px">featured</div>
+        <div style="display:flex;gap:10px;margin-top:10px">
+          <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Free shipping on orders 5000tk+</div>
+          <div style="padding:8px 10px;background:var(--glass);border-radius:10px">Secure local pickup</div>
+        </div>
+      </div>
+      <aside class="side-panel">
+        <h3>Quick Info</h3>
+        <p style="color:var(--muted)">Open: Thu–Sat •<br>Contact: <a href="mailto:otakuoasisbd@gmail.com">Mail us</a> • +8801558056703</p>
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:12px 0">
+        <h4 style="margin:0 0 8px 0">Categories</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Naruto</span>
+          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Demon Slayer</span>
+          <span style="background:rgba(255,255,255,0.02);padding:6px 8px;border-radius:8px;font-size:13px">Jujutsu Kaisen</span>
+        </div>
+      </aside>
+    </section>
+
     <section class="section" id="shop">
       <h3>Shop</h3>
       <div class="grid" id="products-grid"></div>
+    </section>
+
+    <section class="section" id="preorders">
+      <h3>Pre-orders</h3>
+      <div class="pre" id="pre-list"></div>
+    </section>
+
+    <section class="section" id="about">
+      <h3>About Otaku Oasis</h3>
+      <div class="two-col">
+        <div>
+          <p style="color:var(--muted)">Otaku Oasis started with one mission: to bring the best anime figures to passionate collectors at an affordable price. We source from trusted suppliers and inspect every item before listing it. Follow our socials for drop alerts and exclusive sales.</p>
+          <div style="margin-top:12px">
+            <strong style="color:var(--accent3)">Why buy from us?</strong>
+            <ul style="color:var(--muted)">
+              <li>Authentic products</li>
+              <li>Local shipping & pickup</li>
+              <li>Pre-order support</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="contact-card">
+          <h4 style="margin-top:0">Contact & Hours</h4>
+          <p style="color:var(--muted)">Email: <a href="mailto:techoasis0cloud@gmail.com">Click!</a></p>
+          <p style="color:var(--muted)">Phone: +8801558056703</p>
+          <p style="color:var(--muted)">Shop: We are online based (pickup available at New Elephant Road)</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <h3>Contact</h3>
+      <div class="two-col">
+        <div>
+          <p style="color:var(--muted)">Send us a message — we usually reply within 24 hours.</p>
+          <form onsubmit="event.preventDefault(); contactSubmit()" style="max-width:640px">
+            <label>Your name</label>
+            <input id="cname" placeholder="Your name" required>
+            <label>Your email</label>
+            <input id="cemail" type="email" placeholder="you@example.com" required>
+            <label>Message</label>
+            <textarea id="cmsg" rows="5" placeholder="I want to ask about..." required></textarea>
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn primary" type="submit">Send</button>
+              <a class="btn ghost" href="mailto:otaku@example.com">Email Directly</a>
+            </div>
+            <p id="contact-note" style="color:var(--muted);font-size:13px;margin-top:8px"></p>
+          </form>
+        </div>
+        <aside class="contact-card">
+          <h4 style="margin-top:0">Follow & help</h4>
+          <p style="color:var(--muted)">
+            <a href="https://www.instagram.com/theotakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Instagram</a> / 
+            <a href="https://www.facebook.com/otakuoasisbd" target="_blank" style="color:var(--muted); text-decoration:underline;">Facebook</a> 
+            You can also reserve items by sending us a message with the product name.
+          </p>
+        </aside>
+      </div>
     </section>
   </main>
 
@@ -131,104 +230,96 @@
   <!-- Clock -->
   <div id="clock"></div>
 
+  <!-- Modal for slideshow -->
+  <div id="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modal-img">
+    <div style="display:flex;gap:12px">
+      <button class="prev" onclick="prevImage()">Prev</button>
+      <button class="next" onclick="nextImage()">Next</button>
+    </div>
+    <div id="modal-caption"></div>
+  </div>
+
   <script>
-      // ====== Products array (easy to edit/add photos) ======
+    // ===== Products & Preorders =====
     const products = [
-      {
-        id: 'akaza1',
-        name: 'Akaza',
-        price: '700tk',
-        imgs: [
-          'assets/akaza1.JPEG',
-          'assets/akaza2.JPEG',
-          'assets/akaza3.JPEG'
-        ],
-        desc: 'High-quality Akaza figure from Demon Slayer. cm tall, PVC, great for display.'
-      },
-      {
-        id: 'akaza-001',
-        name: 'Akaza (28cm) Premium',
-        price: '800tk',
-        imgs: [
-          'assets/akaza001.jpg',
-          'assets/akaza002.jpg',
-          'assets/akaza003.jpg'
-        ],
-        desc: 'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'
-      },
-      {
-        id: 'gojo-001',
-        name: 'Gojo Satoru',
-        price: '800tk',
-        imgs: [
-          'assets/gojo01.jpg',
-          'assets/gojo02.jpg'
-        ],
-        desc: 'Limited edition Gojo figure with collectible base.'
-      }
+      {id:'akaza1',name:'Akaza',price:'700tk',imgs:['assets/akaza1.JPEG','assets/akaza2.JPEG','assets/akaza3.JPEG'],desc:'High-quality Akaza figure from Demon Slayer.'},
+      {id:'akaza-001',name:'Akaza (28cm) Premium',price:'800tk',imgs:['assets/akaza001.jpg','assets/akaza002.jpg','assets/akaza003.jpg'],desc:'Detailed 28cm Akaza figure. Perfect for Demon Slayer fans.'},
+      {id:'gojo-001',name:'Gojo Satoru',price:'800tk',imgs:['assets/gojo01.jpg','assets/gojo02.jpg'],desc:'Limited edition Gojo figure with collectible base.'}
+    ];
+    const preorders = [
+      {title:'Sailor Moon - Limited', eta:'2026-01', note:'Reserve now, limited run.'},
+      {title:'Jujutsu Kaisen Set', eta:'2025-12', note:'Bundle pre-order discount.'}
     ];
 
-    // ====== Render products on the page ======
-    function renderProducts(){
-      const grid = document.getElementById('products-grid');
-      grid.innerHTML='';
-      products.forEach(p => {
-        const el = document.createElement('div'); el.className='card';
-        el.innerHTML = `
-          <div class="thumb"><img src="${p.imgs[0]}" alt="${p.name}"></div>
-          <h4>${p.name}</h4>
-          <div class="price">${p.price}</div>
-          <div class="desc">${p.desc}</div>
-          <div class="btn-row">
-            <a class="btn primary" href="mailto:otakuoasisbd@gmail.com?subject=Order%20${encodeURIComponent(p.name)}">Reserve / Buy</a>
-            <a class="btn ghost" href="#" onclick="showDetails('${p.id}');return false">Details</a>
-          </div>
-        `;
-        grid.appendChild(el);
-      });
-    }
-
-    // ====== Show product details with all images ======
-    function showDetails(id){
-      const p = products.find(x=>x.id===id);
-      if(!p) return alert('Product not found');
-
-      let imgsHtml = p.imgs.map(src => `<img src="${src}" style="max-width:100%;margin-bottom:8px;border-radius:8px">`).join('');
-      const html = `
-        <div style="color:#fff; padding:10px; background:#07060b; font-family:Inter, sans-serif">
-          <h2>${p.name}</h2>
-          <div>${imgsHtml}</div>
-          <p>${p.desc}</p>
-          <strong>Price: ${p.price}</strong>
-        </div>
-      `;
-
-      const w = window.open('', '_blank', 'width=400,height=600,scrollbars=yes');
-      w.document.write(html);
-    }
-
-    // ====== Clock ======
+    // ===== Clock =====
     function updateClock() {
       const now = new Date();
-      const options = {
-        timeZone: 'Asia/Dhaka',
-        weekday: 'long',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-      };
-      const timeString = now.toLocaleString('en-US', options);
-      document.getElementById("clock").textContent = timeString;
+      const options = {timeZone:'Asia/Dhaka', weekday:'long', year:'numeric', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit', second:'2-digit'};
+      document.getElementById("clock").textContent = now.toLocaleString('en-US', options);
     }
     setInterval(updateClock, 1000);
     updateClock();
 
-    // ====== Initialize ======
-    renderProducts();
+    // ===== Render Products & Preorders =====
+    const grid = document.getElementById('products-grid');
+    products.forEach(p=>{
+      const el=document.createElement('div'); el.className='card';
+      el.innerHTML = `
+        <div class="thumb"><img src="${p.imgs[0]}" alt="${p.name}"></div>
+        <h4>${p.name}</h4>
+        <div class="price">${p.price}</div>
+        <div class="desc">${p.desc}</div>
+        <div class="btn-row">
+          <a class="btn primary" href="mailto:otakuoasisbd@gmail.com?subject=Order%20${encodeURIComponent(p.name)}">Reserve / Buy</a>
+          <a class="btn ghost" href="#" onclick="showDetails('${p.id}');return false">Details</a>
+        </div>
+      `;
+      grid.appendChild(el);
+      // Make thumbnail clickable
+      el.querySelector('.thumb img').addEventListener('click',()=>{showDetails(p.id)});
+    });
+
+    const list = document.getElementById('pre-list');
+    preorders.forEach(p=>{
+      const div=document.createElement('div'); div.className='pre-card';
+      div.innerHTML=`<strong>${p.title}</strong><div style='color:var(--muted);font-size:13px'>ETA: ${p.eta}</div><div style='margin-top:8px;color:var(--muted)'>${p.note}</div><div style='margin-top:8px'><a class='btn primary' href='mailto:otaku@example.com?subject=Preorder%20${encodeURIComponent(p.title)}'>Pre-order</a></div>`;
+      list.appendChild(div);
+    });
+
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ===== Contact Form =====
+    function contactSubmit(){
+      const name=document.getElementById('cname').value;
+      const email=document.getElementById('cemail').value;
+      const msg=document.getElementById('cmsg').value;
+      const subject=encodeURIComponent('Message from '+name);
+      const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+msg);
+      window.location.href=`mailto:otaku@example.com?subject=${subject}&body=${body}`;
+      document.getElementById('contact-note').textContent='Opening your email app to send the message...';
+    }
+
+    // ===== Modal Slideshow =====
+    let currentImages = [], currentIndex=0, currentCaption='';
+    function showDetails(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return alert('Product not found');
+      currentImages=p.imgs;
+      currentIndex=0;
+      currentCaption=p.name+'\n'+p.desc+'\nPrice: '+p.price;
+      openModal();
+    }
+    function openModal(){
+      const modal=document.getElementById('modal');
+      document.getElementById('modal-img').src=currentImages[currentIndex];
+      document.getElementById('modal-caption').textContent=currentCaption;
+      modal.style.display='flex';
+    }
+    function closeModal(){document.getElementById('modal').style.display='none'}
+    function nextImage(){currentIndex=(currentIndex+1)%currentImages.length; document.getElementById('modal-img').src=currentImages[currentIndex];}
+    function prevImage(){currentIndex=(currentIndex-1+currentImages.length)%currentImages.length; document.getElementById('modal-img').src=currentImages[currentIndex];}
   </script>
 </body>
 </html>
